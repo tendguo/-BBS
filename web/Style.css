@@ -1,0 +1,145 @@
+/* CSS Document */
+
+/* 页面基础样式 */
+
+body,ul,p,img
+{
+    padding: 0;
+    margin: 0;
+    border: 0;
+    list-style: none;
+    list-style-type: none;
+}
+body{
+    color: #333;
+    font-family:'Lucida Grande','Lucida Sans Unicode',arial,verdana,sans-serif;
+    line-height: 16px;
+    text-align: left; 
+    margin: 0;
+    padding: 0;
+    padding-left: 10px;
+    font-size: 14px;
+}   
+form{
+    margin:0px;
+}
+a {
+    color: #333;
+}
+a:visited {
+    color: #6D3C05;}
+a:hover {
+    color: #333;
+    text-decoration: underline;
+}
+#wrap 
+{
+    margin: 0px auto ;
+    padding: 10px;
+    padding-left: 0;
+    width: 100%;
+    text-align: left;
+ 
+}
+/*页面基础样式结束*/
+#Top {
+    padding-top: 3px;
+    background-color: #a82923;
+    border-radius: 5px 5px 0 0;
+}
+#logRegist
+{
+    position: absolute;
+    right: 30px;
+    top: 12px;
+}
+#s_head {
+    margin: 0px auto;
+    height: 25px;
+}
+#logo {
+
+    padding: 0 0 0 10px;
+}
+#menu {
+    height: 40px;
+
+    padding:0;
+    font-size: 14px;
+    font-weight: bold;
+    color: #fff;
+    text-align: center;
+    /*margin-top: 8px;*/
+    background-color: #a82923;
+    /*border-radius: 5px 5px 0 0;*/
+    position: relative;
+}
+#menu ul {
+/*    background-image: url(images/menu_left.gif);*/
+    height: 40px;
+    line-height: 10px;
+    padding-left: 15px;
+    background-repeat: no-repeat;
+    background-position: left;
+    list-style:none;
+   
+}
+#menu ul li {
+    float: left;
+    margin-top: 4px;
+
+}
+#menu ul li a {
+    display: block;
+    height: 24px;
+    text-decoration: none;
+    padding-top: 12px;
+}
+
+#menu_left a
+{
+    color: #ffffff;
+}
+#menu_left a:hover {
+    /*background-image: url(images/menu_a_bg03.gif);*/
+    
+    text-decoration: none;
+}
+#m_01{
+    width: 65px;
+}
+#m_01 a:hover{
+/*    background-image: url(images/menu_a_bg02.gif);*/
+}
+#m_02,#m_03,#m_04,#m_05,#m_06,#m_07,#m_08 {
+    width: 94px;
+}
+#m_07 a,#m_08 a {
+
+}
+
+.menu_ge {
+    width: 2px;
+    height: 36px;
+    /*background-image: url(images/menu_ge.gif);*/
+}
+#menu_right {
+    width: 3px;
+    height: 40px;
+    background-image: url(images/menu_right.gif);
+    float: right;
+}
+#location span {
+    float: right;
+    margin-right: 5px;
+}
+
+#content {
+    float:left;
+    width:740px;
+    border-right:1px solid #48adff;
+    margin-top: 0px;
+    margin-right: 5px;
+    margin-bottom: 0px;
+    margin-left: 3px;
+}

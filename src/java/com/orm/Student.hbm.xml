@@ -1,0 +1,51 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2011-11-22 22:11:50 by Hibernate Tools 3.2.1.GA -->
+<hibernate-mapping>
+    <class name="com.orm.Student" table="student" catalog="bbs">
+        <id name="id" type="java.lang.Integer">
+            <column name="id" />
+            <generator class="identity" />
+        </id>
+        <property name="stuNum" type="string">
+            <column name="stuNum" length="15" not-null="true" />
+        </property>
+        <property name="realName" type="string">
+            <column name="realName" length="10" />
+        </property>
+        <property name="nickName" type="string">
+            <column name="nickName" length="20" />
+        </property>
+        <property name="password" type="string">
+            <column name="password" length="20" not-null="true" />
+        </property>
+        <property name="qq" type="string">
+            <column name="qq" length="20" />
+        </property>
+        <property name="email" type="string">
+            <column name="email" length="30" />
+        </property>
+        <property name="major" type="string">
+            <column name="major" length="20" />
+        </property>
+        <property name="className" type="string">
+            <column name="className" length="20" />
+        </property>
+        <property name="photoPath" type="string">
+            <column name="photoPath" length="100" />
+        </property>
+        <set name="replies" inverse="true">
+            <key>
+                <column name="sid" />
+            </key>
+            <one-to-many class="com.orm.Reply" />
+        </set>
+        <set name="posts" inverse="true" lazy="false">
+            <key>
+                <column name="sid" />
+            </key>
+            <one-to-many class="com.orm.Post" />
+        </set>
+    </class>
+</hibernate-mapping>

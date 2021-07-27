@@ -1,0 +1,89 @@
+<?xml version="1.0" encoding="GBK"?>
+<!-- 指定Spring配置文件的Schema信息 -->
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+        xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:aop="http://www.springframework.org/schema/aop"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans 
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
+	http://www.springframework.org/schema/tx 
+	http://www.springframework.org/schema/tx/spring-tx-3.0.xsd
+        http://www.springframework.org/schema/context
+	http://www.springframework.org/schema/context/spring-context-3.0.xsd
+	http://www.springframework.org/schema/aop 
+	http://www.springframework.org/schema/aop/spring-aop-3.0.xsd">
+        
+     <!-- 定义数据源Bean，使用C3P0数据源实现 -->
+    <bean id="dataSource" class="com.mchange.v2.c3p0.ComboPooledDataSource" destroy-method="close">
+		<!-- 指定连接数据库的驱动 -->
+        <property name="driverClass" value="com.mysql.jdbc.Driver"/>
+		<!-- 指定连接数据库的URL -->
+        <property name="jdbcUrl" value="jdbc:mysql://localhost/bbs"/>
+		<!-- 指定连接数据库的用户名 -->
+        <property name="user" value="root"/>
+		<!-- 指定连接数据库的密码 -->
+        <property name="password" value="root"/>
+		<!-- 指定连接数据库连接池的最大连接数 -->
+        <property name="maxPoolSize" value="40"/>
+		<!-- 指定连接数据库连接池的最小连接数 -->
+        <property name="minPoolSize" value="1"/>
+		<!-- 指定连接数据库连接池的初始化连接数 -->
+        <property name="initialPoolSize" value="1"/>
+		<!-- 指定连接数据库连接池的连接的最大空闲时间 -->
+        <property name="maxIdleTime" value="20"/>
+    </bean>
+	<!-- 定义Hibernate的SessionFactory -->
+    <bean id="sessionFactory"  class="org.springframework.orm.hibernate3.LocalSessionFactoryBean">
+		<!-- 依赖注入数据源，注入正是上面定义的dataSource -->
+        <property name="dataSource" ref="dataSource"/>
+		<!-- mappingResouces属性用来列出全部映射文件 -->
+        <property name="mappingResources">
+            <list>
+				<!-- 以下用来列出Hibernate映射文件 -->
+                <value>com/orm/Admin.hbm.xml</value>
+                <value>com/orm/Board.hbm.xml</value>
+                <value>com/orm/Post.hbm.xml</value>
+                <value>com/orm/Student.hbm.xml</value>
+                <value>com/orm/Reply.hbm.xml</value>
+            </list>
+        </property>
+		<!-- 定义Hibernate的SessionFactory的属性 -->
+        <property name="hibernateProperties">
+			<!-- 配置Hibernate属性 -->
+            <props>
+                <prop key="hibernate.dialect">org.hibernate.dialect.MySQLInnoDBDialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
+                <prop key="hibernate.format_sql">true</prop>
+                <prop key="hibernate.hbm2ddl.auto">update</prop>
+                <prop key="hibernate.jdbc.fetch_size">50</prop>
+                <prop key="hibernate.jdbc.batch_size">50</prop>
+            </props> 
+        </property>
+    </bean>
+
+    <bean id="hibernateTemplate"  class="org.springframework.orm.hibernate3.HibernateTemplate">  
+        <property name="sessionFactory">  
+            <ref bean="sessionFactory"/>  
+        </property>  
+        <property name="allowCreate">  
+            <value>true</value>  
+        </property>  
+    </bean> 
+         <!-- 依赖注入 通过注解注入 -->
+         <!-- 即将被注入dao -->
+    <bean id="dao" class="com.dao.BaseDaoImpl" ></bean>
+        <!-- 业务层注入 即将注入action控制层 -->
+    <bean id="loginService" class="com.serviceImpl.LoginServiceImpl" ></bean>
+    <bean id="boardService" class="com.serviceImpl.BoardServiceImpl" ></bean>
+    <bean id="postService" class="com.serviceImpl.PostServiceImpl" ></bean>
+    <bean id="replyService" class="com.serviceImpl.ReplyServiceImpl" ></bean>
+    <bean id="studentService" class="com.serviceImpl.StudentServiceImpl" ></bean>
+    <bean id="adminService" class="com.serviceImpl.AdminServiceImpl" ></bean>
+	<!-- 开启Spring的Annotation注解处理器 -->
+    <context:annotation-config />
+
+	<!-- 开启Spring的Bean自动扫描机制来查找与管理Bean实例 -->
+    <context:component-scan base-package="com" />
+</beans>
